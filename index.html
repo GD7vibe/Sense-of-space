@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sense of Space · Decluttering &amp; Organising, Plymouth</title>
+<meta name="description" content="Calm, judgement-free decluttering, organising and paperwork help in Plymouth, Devon. 3-hour sessions at £25 an hour. Book a morning or afternoon online.">
+<meta name="theme-color" content="#76B5BA">
+<meta property="og:title" content="Sense of Space · Decluttering &amp; Organising, Plymouth">
+<meta property="og:description" content="Helping you regain your home, one item at a time.">
+<meta property="og:image" content="assets/after.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: every chapter opens through a circle, echoing the logo; full-bleed rooms, bold black type, nothing else. */
+:root{
+  --teal:#76B5BA; --am:#3DB26E; --pm:#F39237; --teal-deep:#3F7E84; --mist:#E6F0EF; --paper:#FFFFFF; --ink:#0B1213; --line:#0B121322;
+  --display:"Jost","Futura","Avenir Next","Century Gothic",sans-serif;
+  --body:"Jost","Avenir Next","Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Menlo,monospace;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* One swipe = one stop. Each stop is a resting point in the story. */
+html{scroll-snap-type:y mandatory}
+.snap{position:absolute;left:0;width:1px;height:1px;pointer-events:none;scroll-snap-align:start;scroll-snap-stop:always}
+.snap-sec{scroll-snap-align:start;scroll-snap-stop:always}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-weight:500;font-size:18px;line-height:1.55;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:50;background:var(--teal)}
+.gut{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;margin:0;text-wrap:balance;letter-spacing:-.025em;line-height:1}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+/* ---------- top bar ---------- */
+.bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding-block:18px;mix-blend-mode:difference;color:#fff;pointer-events:none}
+.bar a{pointer-events:auto;text-decoration:none;font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+
+/* ---------- circle tracks (the engine) ---------- */
+.track{position:relative}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--base)}
+.layer{position:absolute;inset:0;clip-path:circle(var(--R,0px) at var(--ox,50%) var(--oy,50%));z-index:2}
+.layer.bg-teal{background:var(--teal)} .layer.bg-mist{background:var(--mist)}
+.ring{position:absolute;left:var(--ox,50%);top:var(--oy,50%);width:calc(var(--R,0px)*2);aspect-ratio:1;translate:-50% -50%;border-radius:50%;border:3px solid #fff;opacity:calc(1 - var(--l,0));z-index:5;pointer-events:none}
+.ring::after{content:"";position:absolute;inset:7px;border-radius:50%;border:1.5px solid #fff}
+[data-fade]{opacity:var(--o,0);translate:0 calc((1 - var(--o,0)) * 28px)}
+.center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:3}
+.pin > .center{z-index:1}
+
+/* ---------- hero ---------- */
+#hero{height:440vh;--base:var(--teal)}
+.photo{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 55%;display:block}
+#hero .layer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.82));z-index:1;pointer-events:none}
+.hero-logo{position:absolute;left:50%;top:50%;width:min(62vmin,440px);aspect-ratio:1;translate:-50% -50%;scale:calc(1 + var(--p,0)*1.6);opacity:calc(1 - var(--p,0)*2.4);z-index:6;pointer-events:none}
+.hero-logo img{width:100%;height:100%;display:block}
+.hero-copy{position:absolute;left:0;right:0;bottom:12vh;z-index:6;text-align:center}
+.hero-copy h1{font-size:clamp(48px,10vw,140px)}
+.hero-copy .label{margin-top:20px;display:block}
+.hint{position:absolute;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:6;opacity:calc(1 - var(--p,0)*6);display:flex;flex-direction:column;align-items:center;gap:10px}
+.hint i{width:2px;height:42px;background:var(--ink);transform-origin:top;animation:drip 2.4s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- scenes: rooms drawn in light ---------- */
+.scene{position:absolute;inset:0;overflow:hidden;background:linear-gradient(180deg,var(--w1) 0%,var(--w2) 64%,var(--f1) 64%,var(--f2) 100%)}
+.scene::after{content:"";position:absolute;inset:0;background:var(--grain),radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(20,35,38,.22));mix-blend-mode:multiply;opacity:.5;pointer-events:none}
+.scene .light{position:absolute;left:var(--lx,8%);top:-10%;width:46%;height:120%;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,0) 85%);clip-path:polygon(18% 0,58% 0,100% 100%,40% 100%);filter:blur(14px);mix-blend-mode:soft-light;opacity:.9}
+.scene .skirting{position:absolute;left:0;right:0;top:63%;height:1.2%;background:rgba(255,255,255,.55)}
+.obj{position:absolute}
+.shadow{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(30,40,40,.28),transparent);filter:blur(4px)}
+.sA{--w1:#E9EFEE;--w2:#DCE6E4;--f1:#D6CAB9;--f2:#C4B6A3}
+.sA .bench{left:30%;width:40%;bottom:26%;height:4.2%;background:linear-gradient(180deg,#D9CBB7,#BFAF99);border-radius:3px}
+.sA .leg{bottom:20%;width:.9%;height:6.2%;background:#A9987F}
+.sA .vase{left:57%;bottom:30.2%;width:4.5%;aspect-ratio:.62;background:linear-gradient(90deg,#F4F4F0,#DCDCD5);border-radius:40% 40% 18% 18%/30% 30% 12% 12%}
+.sA .stem{left:59.1%;bottom:38%;width:.25%;height:22%;background:#6E7D63;transform:rotate(-6deg);transform-origin:bottom}
+.sA .frame{left:38%;top:16%;width:12%;aspect-ratio:.8;border:clamp(4px,.6vw,9px) solid #F7F7F4;background:var(--teal);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.sB{--w1:#F3F0EB;--w2:#E7E2DA;--f1:#BAC7C4;--f2:#A9B8B5}
+.sB .shelf{left:18%;width:64%;height:1.4%;background:#FAFAF8;box-shadow:0 6px 10px rgba(0,0,0,.08)}
+.sB .book{width:1.6%;background:var(--c)}
+.sB .box{width:9%;aspect-ratio:1.3;background:linear-gradient(180deg,#D8C3A5,#C3AB8A);border-radius:2px}
+.sB .bowl{width:7%;height:3.4%;background:#F8F8F5;border-radius:0 0 50% 50%/0 0 100% 100%}
+.sC{--w1:#E2ECEB;--w2:#D6E4E2;--f1:#EDE8E0;--f2:#E3DCD0}
+.sC .drawer{left:14%;right:14%;top:10%;bottom:30%;background:#F6F3EE;border-radius:6px;box-shadow:0 30px 60px rgba(30,50,50,.16),inset 0 0 0 10px #EDE7DE;display:grid;grid-template-columns:repeat(5,1fr);gap:3%;padding:3.5%}
+.sC .drawer span{border-radius:5px;background:var(--c);box-shadow:inset 0 -6px 0 rgba(0,0,0,.05)}
+.sD{--w1:#E8EEED;--w2:#DAE3E1;--f1:#CDBDA7;--f2:#BEAD95}
+.sD .desk{left:0;right:0;top:55%;bottom:0;background:linear-gradient(180deg,#D3C3AC,#C3B198)}
+.sD .stack{width:15%;background:repeating-linear-gradient(180deg,#FFFFFF 0 3px,#E7E7E2 3px 4px);border-radius:2px;box-shadow:0 14px 22px rgba(40,30,20,.18)}
+.sD .tab{height:3%;width:4%;background:var(--teal)}
+.sD .pen{width:14%;height:.9%;background:#2E3B3D;border-radius:4px;transform:rotate(-14deg)}
+
+/* text sitting on a room gets a soft paper halo so it always reads */
+.on-room{text-shadow:0 0 18px rgba(255,255,255,.9),0 0 3px rgba(255,255,255,.8)}
+
+/* ---------- statement ---------- */
+.statement{min-height:100vh;display:grid;place-items:center;padding-block:20vh;text-align:center}
+.statement h2{font-size:clamp(38px,6.4vw,92px);max-width:15ch;margin-inline:auto}
+.statement h2 em{font-style:normal;color:var(--teal-deep)}
+.statement p{margin-top:32px;max-width:40ch;margin-inline:auto;font-size:20px}
+
+/* ---------- rooms ---------- */
+#rooms{height:640vh;--base:var(--paper)}
+#rooms .center h2{font-size:clamp(40px,7vw,104px);max-width:12ch}
+#rooms .center .label{display:block;margin-bottom:22px}
+.panel-copy{position:absolute;z-index:4;left:0;right:0;bottom:calc(8vh + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:end}
+.panel-copy h3{font-size:clamp(54px,11vw,160px)}
+.panel-copy p{max-width:34ch;justify-self:end;font-size:19px}
+.panel-copy .label{display:block;margin-bottom:14px}
+.chip{display:inline-block;margin-top:14px;font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:#fff;padding:7px 12px;border-radius:99px;text-shadow:none}
+.counter{position:absolute;right:max(24px,env(safe-area-inset-right,0px));top:calc(70px + env(safe-area-inset-top,0px));z-index:6;font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.16em}
+
+/* ---------- process ---------- */
+.process{padding-block:20vh;max-width:1240px;margin-inline:auto}
+.process h2{font-size:clamp(38px,5.4vw,72px);max-width:14ch;margin-top:16px}
+.steps{list-style:none;margin:72px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px}
+.steps li{border-top:3px solid var(--ink);padding-top:22px;min-width:0}
+.steps b{display:block;font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.16em;margin-bottom:28px}
+.steps h4{margin:0 0 10px;font-size:26px;letter-spacing:-.01em}
+.steps p{font-size:17px}
+
+/* ---------- price ---------- */
+#price{height:260vh;--base:var(--paper)}
+#price .q{font-size:clamp(40px,7vw,104px)}
+.big{font-family:var(--display);font-weight:700;font-size:clamp(110px,24vw,340px);line-height:.88;letter-spacing:-.05em}
+.big small{font-size:.15em;letter-spacing:0;margin-left:.3em}
+.facts{list-style:none;margin:48px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 14px;max-width:900px}
+.facts li{font-size:16px;font-weight:600;border:2px solid var(--ink);border-radius:99px;padding:10px 18px}
+
+/* ---------- into booking ---------- */
+#door{background:var(--teal);min-height:100vh;min-height:100svh;display:grid;place-items:center;text-align:center;padding-block:10vh}
+#door img{width:min(62vmin,440px);display:block;margin:0 auto 32px}
+#door h2{font-size:clamp(42px,7vw,104px)}
+#door p{margin-top:20px;font-size:20px}
+
+/* ---------- booking ---------- */
+.book{background:var(--teal);padding-block:6vh 16vh}
+.book-in{max-width:1180px;margin-inline:auto}
+.book-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:40px}
+.book-head h2{font-size:clamp(40px,6vw,84px)}
+.book-head p{max-width:36ch;font-size:18px}
+.cal{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px}
+.card{background:#fff;border-radius:22px;padding:28px;min-width:0}
+.cal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px}
+.cal-top h3{font-size:28px;letter-spacing:-.01em}
+.nav{display:flex;gap:8px}
+.nav button{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:#fff;cursor:pointer;font-weight:700;font-size:18px}
+.nav button:disabled{opacity:.25;cursor:default}
+.dow,.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.dow span{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.14em;text-align:center;padding-bottom:8px}
+.day{position:relative;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--mist);box-shadow:inset 0 0 0 2px #0B121318}
+.half{position:absolute;top:0;bottom:0;width:50%;border:0;padding:0;margin:0;background:transparent;cursor:pointer;transition:background .18s}
+.half.am{left:0;border-right:2px solid #fff}
+.half.pm{right:0}
+.half:hover:not(:disabled):not(.on){background:#0B121314}
+.half.am.on{background:var(--am)}
+.half.pm.on{background:var(--pm)}
+.half.taken{background:repeating-linear-gradient(45deg,#0B121330 0 2px,transparent 2px 6px);cursor:not-allowed}
+.half:focus-visible{outline:3px solid var(--ink);outline-offset:-3px}
+.day .num{position:absolute;inset:0;display:grid;place-items:center;font-weight:700;font-size:clamp(15px,2.4vw,24px);color:var(--ink);pointer-events:none;text-shadow:0 0 6px #fff,0 0 3px #fff,0 0 1px #fff}
+.day.today{box-shadow:inset 0 0 0 3px var(--ink)}
+.day.past{background:transparent;box-shadow:none}
+.day.past .num{color:#0B121355;font-weight:500;text-shadow:none}
+.day.hol{background:repeating-linear-gradient(-45deg,#76B5BA55 0 4px,#FFFFFF 4px 9px);box-shadow:inset 0 0 0 2px #76B5BA}
+.day.hol .num{color:#0B121399}
+.blank{aspect-ratio:1}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:20px;font-size:14px;font-weight:600}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sw{width:16px;height:16px;border-radius:50%;display:inline-block;flex:none}
+.sw.am{background:var(--am);border-radius:16px 0 0 16px;width:8px}
+.sw.pm{background:var(--pm);border-radius:0 16px 16px 0;width:8px}
+.sw.bk{background:repeating-linear-gradient(45deg,#0B121355 0 2px,var(--mist) 2px 5px)}
+.sw.hl{background:repeating-linear-gradient(-45deg,#76B5BA 0 3px,#fff 3px 6px);box-shadow:inset 0 0 0 1.5px #76B5BA}
+.holnote{margin-top:14px;font-size:15px;font-weight:600;background:var(--mist);border-radius:12px;padding:10px 14px}
+.deposit{display:flex;align-items:center;gap:24px;background:var(--ink);color:#fff;border-radius:22px;padding:22px 28px;margin-bottom:24px}
+.deposit .big-d{font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,72px);line-height:1;letter-spacing:-.04em;color:var(--teal)}
+.deposit p{font-size:17px;max-width:60ch}
+@media (max-width:520px){.deposit{flex-direction:column;align-items:flex-start;gap:8px}}
+.slots h3{font-size:28px;letter-spacing:-.01em;margin-top:12px}
+.picked{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+.picked li{display:flex;align-items:center;gap:12px;border:2px solid var(--ink);border-radius:14px;padding:10px 10px 10px 14px;font-weight:600;font-size:16px}
+.picked li .t{flex:1;min-width:0}
+.picked li small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;font-weight:600}
+.picked .x{width:36px;height:36px;border-radius:50%;border:0;background:var(--mist);cursor:pointer;font-weight:700;font-size:16px;flex:none}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;font-weight:700;font-size:18px}
+.total b{font-family:var(--display);font-size:32px;letter-spacing:-.02em}
+.req{margin-top:18px;border-top:2px solid var(--ink);padding-top:18px}
+.req p{font-size:16px}
+.msg{margin-top:12px;background:var(--mist);border-radius:12px;padding:14px 16px;font-size:16px;font-weight:600;user-select:all;overflow-wrap:anywhere}
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:99px;padding:14px 20px;font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:2px solid var(--ink)}
+.btn.solid{background:var(--ink);color:#fff}
+.btn.line{background:#fff;color:var(--ink)}
+.btn.pay{background:var(--am);border-color:var(--am);color:var(--ink);width:100%;padding:18px 20px;font-size:13px;margin-top:16px}
+.btn.pay:disabled{background:#fff;border:2px dashed #0B121366;color:#0B121399;cursor:not-allowed}
+.empty{font-size:16px;margin-top:10px}
+.note{margin-top:22px;font-size:14px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:12vh;border-top:2px solid var(--ink);padding-top:20px}
+
+@media (max-width:820px){
+  .panel-copy{grid-template-columns:1fr}
+  .panel-copy p{justify-self:start}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 20px}
+  .sC .drawer{grid-template-columns:repeat(3,1fr);left:8%;right:8%}
+  .cal{grid-template-columns:1fr}
+  .card{padding:20px}
+  .bar .hide-sm{display:none}
+}
+@media (max-width:420px){.steps{grid-template-columns:1fr}.dow,.days{gap:5px}}
+@media (prefers-reduced-motion:reduce){.hint i{animation:none}}
+@media (max-height:420px){html{scroll-snap-type:y proximity}}
+</style>
+</head>
+<body>
+<header class="bar gut">
+  <a href="#hero">Sense of Space</a>
+  <a href="#book" class="hide-sm">Book a session</a>
+</header>
+
+<!-- 1. The logo is a window -->
+<section class="track" id="hero" data-track data-stops="0 .38 1" aria-label="Sense of Space">
+  <div class="pin">
+    <div class="layer" data-in="0 .3" data-o="50 50">
+      <img class="photo" src="assets/before.jpg" alt="A cluttered living room with toys, papers and laundry everywhere">
+      <div class="hero-copy gut on-room" data-fade=".24 .32 .44 .5">
+        <h1>Does this look familiar?</h1>
+        <span class="label">Before</span>
+      </div>
+    </div>
+    <div class="layer" data-in=".5 .82" data-o="50 50">
+      <img class="photo" src="assets/after.jpg" alt="The same living room, clear and calm after a session">
+      <div class="hero-copy gut on-room" data-fade=".78 .92">
+        <h1>Regain your home.</h1>
+        <span class="label">After · Decluttering &amp; organising · Plymouth</span>
+      </div>
+      <div class="ring"></div>
+    </div>
+    <div class="hero-logo"><img src="assets/logo.png" alt="Sense of Space"></div>
+    <div class="hint"><span class="label">Scroll</span><i></i></div>
+  </div>
+</section>
+
+<section class="statement gut snap-sec">
+  <div>
+    <h2>Less stuff. More <em>space</em> to live in.</h2>
+    <p>Calm, practical, judgement-free help to clear the clutter, organise what stays and keep on top of the paperwork. One item at a time.</p>
+  </div>
+</section>
+
+<!-- 2. Three rooms, each opening through its own circle -->
+<section class="track" id="rooms" data-track data-stops="0 .32 .653 1" aria-label="Services">
+  <div class="pin">
+    <div class="center gut" data-fade="-1 0 0.013 0.063"><div><span class="label">What I do</span><h2>Three ways to get your space back.</h2></div></div>
+
+    <div class="layer" data-in="0.047 0.247" data-o="50 50">
+      <div class="scene sB" aria-hidden="true">
+        <div class="light" style="--lx:52%"></div><div class="skirting"></div>
+        <div class="obj shelf" style="top:24%"></div>
+        <div class="obj book" style="left:22%;top:12.4%;height:11.6%;--c:#2F4B4F"></div>
+        <div class="obj book" style="left:24%;top:14%;height:10%;--c:#76B5BA"></div>
+        <div class="obj book" style="left:26%;top:13%;height:11%;--c:#C9B79F"></div>
+        <div class="obj bowl" style="left:66%;top:20.6%"></div>
+        <div class="obj shelf" style="top:42%"></div>
+        <div class="obj box" style="left:44%;top:31.4%"></div>
+        <div class="obj box" style="left:54%;top:31.4%"></div>
+      </div>
+      <span class="counter on-room" data-fade="0.247 0.313 0.333 0.383">01 / 03</span>
+      <div class="panel-copy gut on-room" data-fade="0.247 0.313 0.333 0.383">
+        <div><span class="label">Keep · Donate · Let go</span><h3>Declutter</h3></div>
+        <p>We work through each room together and you decide what stays. Everything you let go of leaves with me: one car load to a local charity shop is included in every session.</p>
+      </div>
+    </div>
+
+    <div class="layer" data-in="0.367 0.567" data-o="50 50">
+      <div class="scene sC" aria-hidden="true">
+        <div class="obj drawer">
+          <span style="--c:#76B5BA"></span><span style="--c:#E3DDD2"></span><span style="--c:#9CC9CD"></span><span style="--c:#E3DDD2"></span><span style="--c:#C9B79F"></span>
+          <span style="--c:#E3DDD2"></span><span style="--c:#C9B79F"></span><span style="--c:#E3DDD2"></span><span style="--c:#76B5BA"></span><span style="--c:#E3DDD2"></span>
+          <span style="--c:#9CC9CD"></span><span style="--c:#E3DDD2"></span><span style="--c:#76B5BA"></span><span style="--c:#E3DDD2"></span><span style="--c:#9CC9CD"></span>
+        </div>
+      </div>
+      <span class="counter on-room" data-fade="0.567 0.633 0.667 0.717">02 / 03</span>
+      <div class="panel-copy gut on-room" data-fade="0.567 0.633 0.667 0.717">
+        <div><span class="label">Kitchens · Wardrobes · Lofts</span><h3>Organise</h3></div>
+        <p>A place for everything, and easy to keep that way. Simple systems for kitchens, wardrobes, garages and kids' rooms, built around how your household actually lives.</p>
+      </div>
+    </div>
+
+    <div class="layer" data-in="0.7 0.9" data-o="50 50">
+      <div class="scene sD" aria-hidden="true">
+        <div class="light" style="--lx:30%"></div>
+        <div class="obj desk"></div>
+        <div class="obj stack" style="left:24%;top:44%;height:14%"></div>
+        <div class="obj stack" style="left:42.5%;top:47%;height:11%"></div>
+        <div class="obj stack" style="left:61%;top:50%;height:8%"></div>
+        <div class="obj tab" style="left:26%;top:44%"></div>
+        <div class="obj tab" style="left:44.5%;top:47%"></div>
+        <div class="obj tab" style="left:63%;top:50%"></div>
+        <div class="obj pen" style="left:43%;top:72%"></div>
+      </div>
+      <span class="counter on-room" data-fade="0.9 0.967">03 / 03</span>
+      <div class="panel-copy gut on-room" data-fade="0.9 0.967">
+        <div><span class="label">Post · Bills · Records</span><h3>Paperwork</h3></div>
+        <p>The pile on the side, the drawer nobody opens. Sorted, filed and labelled into a system you can run in ten minutes a week.<br><span class="chip">New service</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process gut snap-sec" aria-labelledby="how">
+  <p class="label">How it works</p>
+  <h2 id="how">Four steps. No judgement.</h2>
+  <ol class="steps">
+    <li><b>01</b><h4>Pick a session</h4><p>Choose a free morning or afternoon in the calendar at the bottom of this page.</p></li>
+    <li><b>02</b><h4>Pay the deposit</h4><p>A £25 non-refundable deposit secures your 3-hour session. Then a quick call about what's bothering you most.</p></li>
+    <li><b>03</b><h4>We work together</h4><p>Three hours, one area at a time. You make the decisions, I keep it moving.</p></li>
+    <li><b>04</b><h4>It leaves with me</h4><p>Donations go to a local charity shop the same day. You keep the space.</p></li>
+  </ol>
+</section>
+
+<!-- 3. Price opens through a circle -->
+<section class="track" id="price" data-track data-stops="0 1" aria-label="Pricing">
+  <div class="pin">
+    <div class="center gut" data-fade="-1 0 .04 .14"><div><span class="label">Simple pricing</span><h2 class="q" style="margin-top:18px">What does it cost?</h2></div></div>
+    <div class="layer bg-mist" data-in=".08 .5" data-o="50 50">
+      <div class="center gut"><div data-fade=".42 .65">
+        <div class="big">£25<small>/ hour</small></div>
+        <ul class="facts">
+          <li>3-hour sessions</li>
+          <li>£25 non-refundable deposit to book</li>
+          <li>Charity shop drop included</li>
+          <li>Plymouth &amp; 45 minutes around</li>
+        </ul>
+      </div></div>
+      <div class="ring" style="border-color:var(--teal)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. The logo circle opens the door to booking -->
+<section class="door gut snap-sec" id="door" aria-label="Book">
+  <div>
+    <img src="assets/logo.png" alt="">
+    <h2>One item at a time.</h2>
+    <p>Pick an available session below.</p>
+  </div>
+</section>
+
+<section class="book gut snap-sec" id="book" aria-labelledby="book-h">
+  <div class="book-in">
+    <div class="book-head">
+      <h2 id="book-h">Book a session</h2>
+      <p>Monday to Friday. Tap the left half of a day for a morning, the right half for an afternoon.</p>
+    </div>
+    <div class="deposit">
+      <div class="big-d">£25</div>
+      <p><strong>Non-refundable deposit.</strong> A £25 deposit secures each 3-hour session. Your slot is held once the deposit is paid.</p>
+    </div>
+    <div class="cal">
+      <div class="card">
+        <div class="cal-top">
+          <h3 id="range">—</h3>
+          <div class="nav">
+            <button type="button" id="prev" aria-label="Previous month">←</button>
+            <button type="button" id="next" aria-label="Next month">→</button>
+          </div>
+        </div>
+        <div class="dow" aria-hidden="true"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span></div>
+        <div class="days" id="days" aria-label="Sessions this month"></div>
+        <p class="holnote" id="holnote" hidden></p>
+        <div class="legend">
+          <span><i class="sw am"></i>Morning 09:30–12:30</span>
+          <span><i class="sw pm"></i>Afternoon 12:30–15:30</span>
+          <span><i class="sw bk"></i>Booked</span>
+          <span><i class="sw hl"></i>School holiday</span>
+        </div>
+      </div>
+      <div class="card slots" aria-live="polite">
+        <span class="label">Your sessions</span>
+        <h3 id="sel-title">Tap a day</h3>
+        <p class="empty" id="empty">Tap the <strong>left half</strong> of a day for a morning, the <strong>right half</strong> for an afternoon. Tap both for a full day.</p>
+        <ul class="picked" id="picked"></ul>
+        <div id="req" hidden>
+          <div class="total"><span>Deposit to pay</span><b id="dep">£25</b></div>
+          <div id="paybox"></div>
+          <div class="req">
+            <p>Or send me this message and I'll reply with how to pay. Sessions are confirmed once the deposit is paid.</p>
+            <div class="msg" id="msg"></div>
+            <div class="acts">
+              <button type="button" class="btn solid" id="copy">Copy message</button>
+              <a class="btn line" href="https://www.facebook.com/" target="_blank" rel="noopener">Open Facebook</a>
+            </div>
+            <p class="note">Or call or text <strong class="num" style="user-select:all">07000 000000</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Availability shown is an example until the live diary is connected.</p>
+    <div class="foot">
+      <span class="label">Sense of Space · Decluttering &amp; organising</span>
+      <span class="label">Plymouth, Devon</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  /* ---------- circle engine: every circle opens and closes on the centre ---------- */
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp=v=>Math.min(1,Math.max(0,v));
+  const ease=t=>1-Math.pow(1-t,3);
+  const rng=s=>s?s.split(' ').map(Number):null;
+  const seg=(p,a,b)=>clamp((p-a)/(b-a));
+  const tracks=[...document.querySelectorAll('[data-track]')].map(el=>({
+    el,
+    layers:[...el.querySelectorAll('.layer[data-in]')].map(l=>{
+      const [ox,oy]=l.dataset.o.split(' ').map(Number);
+      l.style.setProperty('--ox',ox+'%'); l.style.setProperty('--oy',oy+'%');
+      return {l,i:rng(l.dataset.in),o:rng(l.dataset.out),ox:ox/100,oy:oy/100};
+    }),
+    fades:[...el.querySelectorAll('[data-fade]')].map(f=>({f,r:rng(f.dataset.fade)}))
+  }));
+  /* snap markers at each resting point along a track */
+  document.querySelectorAll('[data-stops]').forEach(t=>{
+    t.dataset.stops.split(' ').map(Number).forEach(p=>{
+      const m=document.createElement('div'); m.className='snap'; m.setAttribute('aria-hidden','true');
+      m.style.top='calc((100% - 100vh) * '+p+')';
+      t.appendChild(m);
+    });
+  });
+  let ticking=false;
+  function frame(){
+    ticking=false;
+    const W=innerWidth,H=innerHeight;
+    tracks.forEach(t=>{
+      const r=t.el.getBoundingClientRect();
+      const p=clamp(-r.top/(r.height-H));
+      t.el.style.setProperty('--p',ease(p).toFixed(4));
+      t.layers.forEach(L=>{
+        let l=ease(seg(p,L.i[0],L.i[1]));
+        if(L.o) l*=1-ease(seg(p,L.o[0],L.o[1]));
+        if(reduce) l=l>.5?1:0;
+        const max=Math.hypot(Math.max(L.ox,1-L.ox)*W,Math.max(L.oy,1-L.oy)*H)+4;
+        L.l.style.setProperty('--R',(l*max).toFixed(1)+'px');
+        L.l.style.setProperty('--l',l.toFixed(3));
+      });
+      t.fades.forEach(F=>{
+        const r=F.r; let o=seg(p,r[0],r[1]);
+        if(r.length>3) o*=1-seg(p,r[2],r[3]);
+        if(reduce) o=o>.5?1:0;
+        F.f.style.setProperty('--o',o.toFixed(3));
+      });
+    });
+  }
+  const kick=()=>{if(!ticking){ticking=true;requestAnimationFrame(frame);}};
+  addEventListener('scroll',kick,{passive:true}); addEventListener('resize',kick); frame();
+
+  /* ---------- booking calendar ---------- */
+
+  /* PAYMENTS: switch on later. Paste a payment link (Stripe, SumUp, Square or PayPal)
+     into `link` and set `enabled: true`. Until then the button shows as "coming soon". */
+  const PAYMENT = { enabled: false, link: '' };
+
+  /* Plymouth City Council school holidays (plymouth.gov.uk). Not bookable. */
+  const HOLS = [
+    ['Autumn half term','2026-10-24','2026-11-01'],
+    ['Christmas holidays','2026-12-19','2027-01-04'],
+    ['February half term','2027-02-13','2027-02-21'],
+    ['Easter holidays','2027-03-26','2027-04-11'],
+    ['May half term','2027-05-29','2027-06-06'],
+    ['Summer holidays','2027-07-27','2027-08-31'],
+    ['Autumn half term','2027-10-24','2027-11-01'],
+    ['Christmas holidays','2027-12-18','2028-01-03'],
+  ].map(([n,a,b])=>({n,a:new Date(a+'T00:00'),b:new Date(b+'T00:00')}));
+  const SESS=[{k:'am',name:'Morning',time:'09:30–12:30'},{k:'pm',name:'Afternoon',time:'12:30–15:30'}];
+  const MONTHS=12, DEPOSIT=25;
+  const today=new Date(); today.setHours(0,0,0,0);
+  const first=new Date(today.getFullYear(),today.getMonth(),1);
+  const $=id=>document.getElementById(id);
+  const key=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const fmtD=d=>d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+  const fmtL=d=>d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+  const holOf=d=>HOLS.find(h=>d>=h.a&&d<=h.b);
+  const taken=(d,i)=>((d.getDate()*7+d.getMonth()*3+i*5)%4)===0; /* example bookings */
+  let page=0;
+  const sel=new Map(); /* "YYYY-MM-DD|i" -> {d,i} */
+
+  function render(){
+    const m=new Date(first.getFullYear(),first.getMonth()+page,1);
+    $('range').textContent=m.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+    $('prev').disabled=page===0; $('next').disabled=page===MONTHS-1;
+    const box=$('days'); box.innerHTML='';
+    const lead=(m.getDay()+6)%7;
+    if(lead<5) for(let i=0;i<lead;i++){const s=document.createElement('span');s.className='blank';box.appendChild(s);}
+    const dim=new Date(m.getFullYear(),m.getMonth()+1,0).getDate();
+    const holsHere=new Set();
+    for(let n=1;n<=dim;n++){
+      const d=new Date(m.getFullYear(),m.getMonth(),n), wd=d.getDay();
+      if(wd===0||wd===6) continue;
+      const cell=document.createElement('div'); cell.className='day';
+      const hol=holOf(d), past=d<=today;
+      if(+d===+today) cell.classList.add('today');
+      if(past) cell.classList.add('past');
+      else if(hol){cell.classList.add('hol');holsHere.add(hol);cell.title=hol.n+' – not bookable';}
+      else SESS.forEach((s,i)=>{
+        const b=document.createElement('button'); b.type='button'; b.className='half '+s.k;
+        const k=key(d)+'|'+i, isTaken=taken(d,i);
+        if(isTaken){b.classList.add('taken');b.disabled=true;}
+        if(sel.has(k)){b.classList.add('on');b.setAttribute('aria-pressed','true');} else b.setAttribute('aria-pressed','false');
+        b.setAttribute('aria-label',fmtL(d)+', '+s.name.toLowerCase()+' '+s.time+(isTaken?', booked':''));
+        if(!isTaken) b.addEventListener('click',()=>{sel.has(k)?sel.delete(k):sel.set(k,{d,i});render();});
+        cell.appendChild(b);
+      });
+      const num=document.createElement('span'); num.className='num'; num.textContent=n;
+      if(past||hol) num.setAttribute('aria-label',fmtL(d)+(hol&&!past?', '+hol.n+', not bookable':', past'));
+      cell.appendChild(num);
+      box.appendChild(cell);
+    }
+    const hn=$('holnote');
+    if(holsHere.size){
+      hn.textContent=[...holsHere].map(h=>h.n+': '+fmtD(h.a)+' – '+fmtD(h.b)).join(' · ')+'. Not bookable during school holidays.';
+      hn.hidden=false;
+    } else hn.hidden=true;
+    renderPicked();
+  }
+
+  function renderPicked(){
+    const items=[...sel.entries()].sort((a,b)=>a[1].d-b[1].d||a[1].i-b[1].i);
+    const ul=$('picked'); ul.innerHTML='';
+    $('empty').hidden=items.length>0;
+    $('req').hidden=!items.length;
+    $('sel-title').textContent=items.length?items.length+(items.length>1?' sessions':' session'):'Tap a day';
+    items.forEach(([k,v])=>{
+      const s=SESS[v.i], li=document.createElement('li');
+      li.innerHTML='<i class="sw '+s.k+'" style="width:12px;height:24px"></i><span class="t">'+fmtD(v.d)+'<small>'+s.name.toUpperCase()+' · '+s.time+'</small></span>';
+      const x=document.createElement('button'); x.type='button'; x.className='x'; x.textContent='×';
+      x.setAttribute('aria-label','Remove '+fmtL(v.d)+' '+s.name.toLowerCase());
+      x.addEventListener('click',()=>{sel.delete(k);render();});
+      li.appendChild(x); ul.appendChild(li);
+    });
+    if(!items.length) return;
+    const total=items.length*DEPOSIT;
+    $('dep').textContent='£'+total;
+    const pb=$('paybox'); pb.innerHTML='';
+    if(PAYMENT.enabled&&PAYMENT.link){
+      const a=document.createElement('a'); a.className='btn pay'; a.href=PAYMENT.link; a.target='_blank'; a.rel='noopener';
+      a.textContent='Pay £'+total+' deposit'; pb.appendChild(a);
+    } else {
+      const b=document.createElement('button'); b.type='button'; b.className='btn pay'; b.disabled=true;
+      b.textContent='Pay deposit online · coming soon'; pb.appendChild(b);
+    }
+    $('msg').textContent='Hi, I\'d like to book: '+items.map(([k,v])=>fmtL(v.d)+' '+SESS[v.i].name.toLowerCase()+' ('+SESS[v.i].time+')').join('; ')+'. I understand each 3-hour session needs a £25 non-refundable deposit (£'+total+' total). My name is … and I\'m in … (area).';
+  }
+
+  $('prev').addEventListener('click',()=>{page=Math.max(0,page-1);render();});
+  $('next').addEventListener('click',()=>{page=Math.min(MONTHS-1,page+1);render();});
+  $('copy').addEventListener('click',()=>{
+    const btn=$('copy'), txt=$('msg').textContent;
+    const ok=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy message',1500);};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents($('msg'));const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected – copy it';setTimeout(()=>btn.textContent='Copy message',2000);};
+    try{navigator.clipboard.writeText(txt).then(ok,fallback);}catch(e){fallback();}
+  });
+  render();
+})();
+</script>
+
+</body>
+</html>
